@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE_API = 'miradoandrian04/mlops-spam-api'
-        DOCKER_IMAGE_STREAMLIT = 'miradoandrian04/mlops-spam-streamlit'
-        DOCKER_IMAGE_MLFLOW = 'miradoandrian04/mlops-spam-mlflow'
+        DOCKER_IMAGE_API = 'miradoandrian/mlops-spam-api'
+        DOCKER_IMAGE_STREAMLIT = 'miradoandrian/mlops-spam-streamlit'
+        DOCKER_IMAGE_MLFLOW = 'miradoandrian/mlops-spam-mlflow'
     }
 
     stages {
