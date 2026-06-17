@@ -10,23 +10,23 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                echo '📦 Récupération du code depuis GitHub...'
+                echo 'Récupération du code depuis GitHub...'
                 checkout scm
             }
         }
 
         stage('Build Docker Images') {
             steps {
-                echo '🐳 Construction des images Docker...'
+                echo 'Construction des images Docker...'
                 script {
                     sh """
-                        echo "📦 Construction de l'API..."
+                        echo "Construction de l'API..."
                         docker build -f docker/Dockerfile.api -t ${DOCKER_IMAGE_API}:latest .
                         
-                        echo "📦 Construction de Streamlit..."
+                        echo "Construction de Streamlit..."
                         docker build -f docker/Dockerfile.streamlit -t ${DOCKER_IMAGE_STREAMLIT}:latest .
                         
-                        echo "📦 Construction de MLflow..."
+                        echo "Construction de MLflow..."
                         docker build -f docker/Dockerfile.mlflow -t ${DOCKER_IMAGE_MLFLOW}:latest .
                     """
                 }
@@ -35,7 +35,7 @@ pipeline {
 
         stage('Push to Docker Hub') {
             steps {
-                echo '📤 Push des images vers Docker Hub...'
+                echo 'Push des images vers Docker Hub...'
                 script {
                     withCredentials([usernamePassword(
                         credentialsId: 'docker-hub-credentials',
@@ -55,17 +55,22 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                echo '🚀 Déploiement terminé !'
+                echo 'Déploiement...'
+                script {
+                    sh """
+                        echo "Déploiement prêt !"
+                    """
+                }
             }
         }
     }
 
     post {
         success {
-            echo '✅ Pipeline réussi !'
+            echo 'Pipeline réussi !'
         }
         failure {
-            echo '❌ Pipeline échoué. Vérifie les logs.'
+            echo 'Pipeline échoué. Vérifie les logs.'
         }
     }
 }
