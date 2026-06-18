@@ -14,7 +14,7 @@ API_URL = os.getenv("API_URL", "http://localhost:8000/predict")
 
 st.set_page_config(page_title="SMS Spam Detector", layout="centered")
 
-# DEBUG - Afficher l'URL utilisée
+
 st.title(" Détection de SMS Spam")
 
 message = st.text_area("Saisissez votre SMS", height=120)
